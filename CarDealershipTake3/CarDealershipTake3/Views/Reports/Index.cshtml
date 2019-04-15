@@ -1,0 +1,10 @@
+﻿@model List<Model.Models.Inventory>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reports</h2>
+
+@Html.ActionLink("Sales Report", "Sales", "Reports", new { @class = "btn btn-dark mt-2 mb-3" })
+@Html.ActionLink("Inventory Report", "Inventory", "Reports", new { @class = "btn btn-dark mt-2 mb-3" })
+

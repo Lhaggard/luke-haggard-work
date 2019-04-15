@@ -1,0 +1,28 @@
+﻿
+@model List<DeadCollectors.Models.Post>
+@{
+    ViewBag.Title = "Pending";
+}
+
+<h2>Pending</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Count() == 0) {
+            <h4>You're all caught up!</h4>
+        }
+        @foreach (var post in Model) {
+            <div class="posts col-md-12" id=@post.PostID>
+                <p class="postBody">@Html.Raw(post.Body)</p>
+                <p class="category" style="font-size: 1.5rem;">@post.Category.Name</p>
+                <p class="dateCreated">@post.Creation.ToString("MM/dd/yyyy")</p>
+                @Html.ActionLink("Approve", "ApprovePost", "Admin", new { id = post.PostID }, new { @class = "btn btn-dark mt-2 mb-3" })
+                @Html.ActionLink("Reject", "DeletePost", "Admin", new { id = post.PostID }, new { @class = "btn btn-dark mt-2 mb-3 ml-3" })
+                @Html.ActionLink("Edit", "EditPost", "Admin", new { id = post.PostID }, new { @class = "btn btn-dark mt-2 mb-3 ml-3" })
+            </div>
+        }
+    </div>
+</div>
+@section scripts{
+
+}

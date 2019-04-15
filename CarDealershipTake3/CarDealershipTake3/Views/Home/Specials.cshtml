@@ -1,0 +1,13 @@
+﻿@model List<Model.Models.Special>
+@{
+    ViewBag.Title = "Specials";
+}
+<h2>Specials</h2>
+
+@foreach (var special in Model)
+{
+    <div class="vehicle col-md-12">
+        <h3 class="title">@special.Title</h3>
+        <p class="make">@special.Description</p>
+    </div>
+}

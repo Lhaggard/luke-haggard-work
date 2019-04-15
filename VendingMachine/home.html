@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VendingMachine</title>
+        <link href="css/bootstrap.css"
+            rel="stylesheet">
+            <link href="css/home.css" rel="stylesheet">        
+    </head>
+    <body>
+        <div class = "component">
+        <div class ="container">
+            <h1 class = "title">VENDTRON 3000</h1>
+            <h2 class="subTitle">The Future Of Snacks</h2>
+            <hr/>
+            <ul class="list-group" id="errorMessages"></ul>
+            <div class ="col-md-9">
+                        <!--List holding the 9 items in a 
+                            3 by 3 patern starts here.           -->
+                <div class ="item col-md-3"  id="1">
+                    <p class="itemNumber">1</p>
+                    <h3 class="name" >twix</h3>
+                    <p class="price">0.00</p>
+                    <p class="quantity" >0</p>
+                </div>
+                <div class ="item col-md-3"  id="2">
+                    <p class="itemNumber">2</p>
+                    <h3 class="name" >M & Ms</h3>
+                    <p class="price" >0.00</p>
+                    <p class="quantity" >0</p>
+                </div>
+                <div class ="item col-md-3"  id="3">
+                    <p class="itemNumber">89</p>
+                    <h3 class="name" id="name">Pringle</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+                <div class ="item col-md-3"  id="4">
+                    <p class="itemNumber">4</p>
+                    <h3 class="name" id="name">Reese's</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+                <div class ="item col-md-3"  id="5">
+                        <p class="itemNumber">5</p>
+                    <h3 class="name" id="name">Pretzels</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+                <div class ="item col-md-3"  id="6">
+                        <p class="itemNumber">6</p>
+                    <h3 class="name" id="name">Twinkies</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+
+                <div class ="item col-md-3"  id="7">
+                        <p class="itemNumber" >7</p>
+                    <h3 class="name" id="name">Doritos</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+                <div class ="item col-md-3"  id="8">
+                        <p class="itemNumber" >8</p>
+                    <h3 class="name" id="name">Almond Joy</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+                <div class ="item col-md-3"  id="9">
+                        <p class="itemNumber" >9</p>
+                    <h3 class="name" id="name">Trident</h3>
+                    <p class="price" id="price">0.00</p>
+                    <p class="quantity" id="quantity">0</p>
+                </div>
+
+            </div>      
+                <!--Right hand side of the page starts here -->
+                <div class = "rightRow display col-md-3">
+                    <h2 class="rowTitle">Total $ In</h2>
+                    <text type="text" readonly class="displayIn form-control" id="displayIn">
+                        0.00</text>
+                    <br/>
+                    <button id="addDollar" type="button" class="btn btn-default">Add Dollar</button>
+                    <!--I finally gave up on the custome bottons i couldnt get them to work right
+                    I hope to figure out what the issue is in the future-->
+                    <!--<div class = "buttonContainer col-md-6">
+                         <img src="/vendingMachineArt/webVersion/defaultNeonButtonSm.gif" alt="Add dollar button"
+                         id="addDollar" type="button" class="image">
+                    <div class="centered imageText">Add Dollar</div>
+                    </div>
+                    <div class = "buttonContainer col-md-6"></div>
+                        <img src="/vendingMachineArt/webVersion/defaultNeonButtonSm.gif" id="addQuarter" 
+                        class="image">
+                        <div class="centered imageText">Add Quarter</div>
+                    </div>-->
+                    <button id="addQuarter" type="button" class="btn btn-default">Add Quarter</button>
+                    <button type="button" id="addDime" class="btn btn-default">Add Dime</button>
+                    <button type="button" id="addNickle" class="btn btn-default">Add Nickel</button>
+                </div>        
+                <div class = "rightRow display col-md-3">
+                    <h2 class="rowTitle">Messages</h2>
+                    <input type="text" readonly id="message" value="Hello!" class="form-control">
+                        
+                    </text>
+                   <br/>
+                   <form class="form-horizontal">
+                       <div class ="form-group">
+                    <label for="itemNumber" class="col-sm-3 control-label itemLabel">
+                        Item#:
+                    </label>
+                    <div class = "col-sm-8">
+                    <input type="text" readonly  id="itemNumber" class="form-control " value="" >
+               </div>
+                </div> 
+                </form>
+                    <br/>
+                    <button type="button" id="makePurchase" class="btn btn-default">Make Purchase</button>
+                </div>
+
+              
+                <div class = "rightRow display col-md-3 "  >
+                    <h2 class="rowTitle">Change</h2>
+                    <input type="text" readonly class="form-control" id="changeOut" value = "0">
+                    <button type = "button" id="returnChange" class="btn btn-default">Return Change</button>
+                </div>
+            </div>           
+        </div>
+    </body>
+    <script src="scripts/jquery-2.2.4.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/home.js"></script>
+</html>

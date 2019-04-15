@@ -1,0 +1,35 @@
+﻿@model CarDealershipTake3.ViewModels.AddMakes
+@{
+    ViewBag.Title = "Makes";
+
+}
+
+<h2>Makes</h2>
+@Html.ValidationSummary("", new { @class = "text-danger" })
+@using (Html.BeginForm("CreateMake", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label>Make:</label>
+    @Html.TextBoxFor(m => m.Make.Make, new { @class = "form-control"})
+    <button>Add</button>
+   
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Make</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">User</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var make in Model.Makes)
+        {
+            <tr>
+                <td>@make.Make</td>
+                <td>@make.DateAdded</td>
+                <td>@make.AddedBy</td>
+            </tr>
+        }
+    </tbody>
+</table>

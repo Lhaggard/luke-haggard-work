@@ -1,0 +1,29 @@
+﻿@model DeadCollectors.Models.Post
+@{
+    ViewBag.Title = "Edit Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+@using (Html.BeginForm("EditPost", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.TextAreaFor(m => m.Body, new { @class = "mytextarea" })
+    @Html.HiddenFor(m => m.PostID)
+    @Html.HiddenFor(m => m.User.Email)
+    @Html.HiddenFor(m => m.Creation)
+    @Html.HiddenFor(m => m.Photo)
+    @Html.HiddenFor(m => m.Category.Name)
+    <button class="btn btn-dark mt-3" style="font-size: 1.5rem; position: relative; left: 38%;">Save</button>
+    <a href="http://localhost:58224/Admin/Pending" class="btn btn-dark mt-3" style="font-size: 1.5rem; position: relative; left: 38%;">Cancel</a>
+}
+
+
+@section scripts {
+    <script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey=f18d6uwnkr9y0q65wjir7f241qr039oohmk5i94j5vqns97g'></script>
+    <script>
+        tinymce.init({
+            selector: '.mytextarea',
+            height: 600
+        });
+    </script>
+}

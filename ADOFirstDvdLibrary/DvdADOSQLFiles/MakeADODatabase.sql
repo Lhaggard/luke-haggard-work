@@ -1,0 +1,8 @@
+USE master 
+GO
+
+IF EXISTS(SELECT * FROM sys.databases WHERE name='DvdADO')
+DROP DATABASE DvdADO
+
+CREATE DATABASE DvdADO
+GO

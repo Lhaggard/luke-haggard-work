@@ -1,0 +1,68 @@
+﻿@model List<Model.Models.Inventory>
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h2>Inventory Reports</h2>
+
+<h3>New Vehicles</h3>
+<table class="table table-striped">
+
+
+    <thead>
+        <tr>
+            <th scope="col">Year</th>
+            <th scope="col">Make</th>
+            <th scope="col">Model</th>
+            <th scope="col">Count</th>
+            <th scope="col">Stock Value</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var inventory in Model)
+        {
+            if (inventory.IsNew == true)
+            {
+                <tr>
+                    <td>@inventory.Year</td>
+                    <td>@inventory.Make</td>
+                    <td>@inventory.Model</td>
+                    <td>@inventory.Count</td>
+                    <td>@inventory.StockValue</td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h3>Used Vehicles</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Year</th>
+            <th scope="col">Make</th>
+            <th scope="col">Model</th>
+            <th scope="col">Count</th>
+            <th scope="col">Stock Value</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var inventory in Model)
+        {
+            if (inventory.IsNew != true)
+            {
+                <tr>
+                    <td>@inventory.Year</td>
+                    <td>@inventory.Make</td>
+                    <td>@inventory.Model</td>
+                    <td>@inventory.Count</td>
+                    <td>@inventory.StockValue</td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>

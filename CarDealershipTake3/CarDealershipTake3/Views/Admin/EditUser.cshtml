@@ -1,0 +1,48 @@
+﻿@model  CarDealershipTake3.ViewModels.EditUser
+@{
+    ViewBag.Title = "EditUser";
+
+
+    var roles = new List<SelectListItem>();
+    roles.Add(new SelectListItem()
+    {
+        Text = "Admin",
+        Value = "Admin"
+    });
+
+    roles.Add(new SelectListItem()
+    {
+        Text = "Sales",
+        Value = "Sales"
+    });
+
+    roles.Add(new SelectListItem()
+    {
+        Text = "Disabled",
+        Value = "Disabled"
+    });
+
+}
+
+<h2>@ViewBag.Title - @Model.User.Email</h2>
+<div class="col-md-12">
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.User.Id)
+        <hr />
+        @Html.AntiForgeryToken()
+        <p>First Name:</p>
+        @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control" })
+        <p> Last Name:</p>
+        @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control" })
+        <p>Email:</p>
+        @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
+        <p>Role:</p>
+        @Html.DropDownListFor(m => m.NewRole, roles, new { @class = "form-control" })
+        <p>New Password:</p>
+        @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+        <button></button>
+    }
+</div>

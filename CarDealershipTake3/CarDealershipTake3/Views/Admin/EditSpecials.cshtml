@@ -1,0 +1,18 @@
+﻿@model List<Model.Models.Special>
+@{
+    ViewBag.Title = "EditSpecials";
+}
+
+<h2>EditSpecials</h2>
+
+
+@foreach (var special in Model)
+{
+    <div class="vehicle col-md-12">
+        <h3 class="title">@special.Title</h3>
+        <p class="make">@special.Description</p>
+        @Html.ActionLink("Delete", "DeleteSpecial", "Admin", new { id = special.SpecialId }, new { @class = "btn btn-dark mt-2 mb-3" })
+    </div>
+}
+@Html.ActionLink("Add Special", "AddSpecial", "Admin",  new { @class = "btn btn-dark mt-2 mb-3" })
+

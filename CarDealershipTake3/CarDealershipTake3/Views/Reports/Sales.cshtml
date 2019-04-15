@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Sales";
+}
+
+<h2>Sales</h2>
+
+<input type="text" id="search-bar" placeholder="Enter make, model, or year">
+<input type="date" id="minDate">
+<input type="date" id="maxDate">
+<button id="searchButton">Search</button>
+
+
+<table class="table table-striped">
+    <thead>
+   
+    <tr><th >User</th><th scope="col">Total Sales</th><th scope="col">Total Vehicles</th></tr>
+        </thead>
+    <tbody> 
+            <div id="content"></div>
+        </tbody>
+    </table>
+
+        @section scripts{
+            <script>
+
+                $("#searchButton").click(function (event) {
+                    search();
+                })
+                function search() {
+                    var searchBarTerm = $('#search-bar').val();
+                    if (searchBarTerm == '') { searchBarTerm = 'all'; }
+                    var minDate = $('minDate').val();
+                    if (minDate == undefined) { minDate = '1999-04-04'; }
+                    var maxDate = $('maxDate').val();
+                    if (maxDate == undefined) { maxDate = '2999-04-04'; }
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:52020/reports/sales/' + minDate + '/' + maxDate + '/' + searchBarTerm,
+                        success: function (data, status) {
+                            $.each(data, function (index, item) {
+                                var name = item.UserId
+                                var value = item.ValueOfSales;
+                                var totalVehicles = item.TotalVehicles;
+                                var content = '<tr><td>' + name + '</td><td> ' + value + '</td><td>' + totalVehicles + '</td></tr>';
+
+                                $('#content').append(content);
+                            })
+                        }
+                    })
+
+                }
+                function clearContent() {
+                    $("#content").empty();
+                }
+
+            </script>
+
+
+        }

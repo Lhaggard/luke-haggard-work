@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/StickyNav.js"></script>
+    @RenderSection("Styles", false)
+
+</head>
+<body>
+    <div class="col-md-8 row header">
+        <img src="~/Images/MeatWagonLogoPng - Copy.png" />
+        <h1 class="title text-center col-md-8">The Meat Wagon</h1>
+        <img src="~/Images/MeatWagonLogoPng - Copy.png" />
+    </div>
+    <hr class="hr-no-bottom-margin" />
+    <ul class="nav justify-content-center" id="navbar">
+        <li class="nav-item">
+            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Blog", "Index", "Blog", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("About Us", "AboutUs", "Home", null, new { @class = "nav-link" })
+        </li>
+        @if (User.IsInRole("admin")) {
+            <li>
+                @Html.ActionLink("Post Blog", "AddPost", "Blog", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Pending", "Pending", "Admin", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Users", "Users", "Admin", null, new { @class = "nav-link" })
+            </li>
+        }
+        @if (User.IsInRole("publisher")) {
+            <li>
+                @Html.ActionLink("Post Blog", "AddPost", "Blog", null, new { @class = "nav-link" })
+            </li>
+        }
+        <li>
+            @Html.Partial("_LoginPartial")
+        </li>
+    </ul>
+
+    <hr class="hr-no-top-margin" />
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/StickyNav.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

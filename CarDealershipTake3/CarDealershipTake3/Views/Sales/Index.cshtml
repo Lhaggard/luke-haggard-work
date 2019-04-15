@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Used";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var years = new List<SelectListItem>();
+    for (int year = 2000; year <= DateTime.Now.Year + 1; year++)
+    {
+        years.Add(new SelectListItem()
+        {
+            Text = year.ToString(),
+            Value = year.ToString()
+        });
+    }
+}
+
+
+
+<h2>Vehicles</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="vehicle col-md-12" id="search">
+
+            <div class="searchBox col-md-4">
+                <p>Quick Search</p>
+                <input type="text" id="search-bar" placeholder="Enter make, model, or year">
+            </div>
+
+            <div class="col-md-4">
+                <p>Price:</p>
+                <select name="minPrice" id="minPrice">
+                    <option value="0">No Min</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                    <option value="15000">15000</option>
+                    <option value="20000">20000</option>
+                    <option value="25000">25000</option>
+                    <option value="30000">30000</option>
+                </select>
+                <select name="maxPrice" id="maxPrice">
+                    <option value="99999">No Max</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                    <option value="15000">15000</option>
+                    <option value="20000">20000</option>
+                    <option value="25000">25000</option>
+                    <option value="30000">30000</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <p>Year:</p>
+                @Html.DropDownList("Min Year", years, new { Id = "minYearDropDown" })
+                @Html.DropDownList("Max Year", years, new { Id = "maxYearDropDown" })
+            </div>
+            <button type="button" class="btn btn-secondary btn-lg btn-block" id="searchButton">Search</button>
+        </div>
+        <h2>Search Results</h2>
+        <div id="content">
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $("#searchButton").click(function (event) {
+            search();
+        })
+        function search() {
+            var searchBarTerm = $('#search-bar').val();
+            if (searchBarTerm == '') { searchBarTerm = 'all'; }
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:52020/sales/' + $('#minYearDropDown').val() + '/' + $('#maxYearDropDown').val() + '/' + $('#minPrice').val() + '/' + $('#maxPrice').val() + '/' + searchBarTerm,
+                success: function (data, status) {
+                    $.each(data, function (index, item) {
+                        var invNumber = item.InventoryNumber;
+                        var year = item.Year;
+                        var salePrice = item.SalePrice;
+                        var msrp = item.MSRP;
+                        var mileage = item.Mileage;
+                        var bodystyle = item.BodyStyle;
+                        var vin = item.VIN;
+                        var description = item.Description;
+                        var make = item.Make;
+                        var model = item.Model;
+                        var interiorColor = item.InteriorColor;
+                        var exteriorColor = item.ExteriorColor;
+                        var picturePath = item.picturePath;
+                        var isManual = item.IsManual;
+                        var isNew = item.IsNew;
+                        var isFeatured = item.IsFeatured;
+                        var isSold = item.IsSold;
+                        var transsmision = "Manual";
+                        if (isManual == false) { transsmision = "Automatic" };
+                        var content = '<div class="vehicle col-md-12" id="'+ invNumber +'"><p> Year: ' + year + ' </p> <p>'+ make +'</p> <p>'+ model +'</p>';
+                        content += '<p>Body Style: ' + bodystyle + '</p><p>Trans: ' + transsmision + '</p><p>' + exteriorColor + '</p><p>' + interiorColor + '</p><p>' + mileage + '</p>';
+                        content += '<p>' + vin + '</p><p>' + salePrice + '</p><p>' + msrp + '<a href ="http://localhost:52020/Inventory/Purchase/' + invNumber + '">Purchase</a>  </div >';
+
+                        $('#content').append(content);
+                    })
+                }
+            })
+
+        }
+        function clearContent() {
+            $("#content").empty();
+        }
+
+    </script>
+
+
+}

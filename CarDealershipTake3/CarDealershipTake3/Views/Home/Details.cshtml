@@ -1,0 +1,49 @@
+﻿@model Model.Models.Vehicle
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Search Results</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @{var vehicle = Model; }
+        {
+            <div class="vehicle col-md-12" id=@vehicle.InventoryNumber>
+                <div class="right4th col-md-3">
+                    <p class="postBody">@(vehicle.Year)</p>
+                    <p class="postBody">@(vehicle.Make)</p>
+                    <p class="postBody">@(vehicle.Model)</p>
+                </div>
+                <div class="rightmid4th col-md-3">
+                    <p class="postBody">@(vehicle.BodyStyle)</p>
+                    <p class="postBody">@(vehicle.IsManual)</p>
+                    <p class="postBody">@(vehicle.ExteriorColor)</p>
+                </div>
+                <div class="leftmid4th col-md-3">
+                    <p class="postBody">@(vehicle.InteriorColor)</p>
+                    <p class="postBody">@(vehicle.Mileage)</p>
+                    <p class="postBody">@(vehicle.VIN)</p>
+                </div>
+
+                <div class="right4th col-md-3">
+                    <p class="postBody">@(vehicle.SalePrice)</p>
+                    <p class="postBody">@(vehicle.MSRP)</p>
+                    @Html.ActionLink("Contact Us", "Contact", "Home", new { id = vehicle.InventoryNumber }, new { @class = "btn btn-dark mt-2 mb-3" })
+                </div>
+
+
+
+
+            </div>
+        }
+    </div>
+</div>
+

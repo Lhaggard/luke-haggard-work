@@ -1,0 +1,14 @@
+﻿@model Model.Models.Special
+@{
+    ViewBag.Title = "AddSpecial";
+}
+
+<h2>AddSpecial</h2>
+@using (Html.BeginForm("CreateSpecial", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label>Title:</label>
+    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+    <label>Description:</label>
+    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+    <button>Add</button>
+}

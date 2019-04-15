@@ -1,0 +1,45 @@
+﻿@model DeadCollectors.ViewModels.EditUser
+@{
+    ViewBag.Title = "Edit User";
+
+    var _repo = new DeadCollectors.Models.BlogRepository();
+
+    var roles = new List<SelectListItem>();
+    foreach (var role in _repo.GetRoles()) {
+        roles.Add(new SelectListItem() {
+            Value = role.Id,
+            Text = role.Name
+        });
+    }
+}
+
+<h2>@ViewBag.Title - @Model.User.Email</h2>
+
+@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.User.Id)
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.NewPassword, new { @class = "col-md-2 control-label", Value = "New Password" })*@
+        <label class="col-md-3 control-label">New Password</label>
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">Role</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.NewRole, roles, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-dark" value="Save" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

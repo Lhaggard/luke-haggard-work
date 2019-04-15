@@ -1,0 +1,32 @@
+﻿@model DeadCollectors.ViewModels.UsersViewModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var repo = new DeadCollectors.Models.BlogRepository();
+
+}
+
+<table class="table table-borderless" id="users-list">
+    <thead>
+        <tr>
+            <th scope="col">User Email</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users) {
+            <tr>
+                <td>@user.Email</td>
+                <td>@repo.GetRoleName(user.Id)</td>
+                <td><a href="edituser/@user.Id">Edit</a> | <a href="deleteuser/@user.Id" onclick="return confirm('Are you sure you want to delete @user.Email?')">Delete</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a href="/Admin/AddUser" class="btn btn-dark" style="float: right">Add User</a>
+</div>

@@ -1,0 +1,115 @@
+﻿@model CarDealershipTake3.ViewModels.PurchaseViewModel
+@{ ViewBag.Title = "Purchase";
+    var states = new List<SelectListItem>
+      ();
+
+
+    states.Add(new SelectListItem()
+    {
+        Value = "UT",
+        Text = "UT"
+    });
+
+    states.Add(new SelectListItem()
+    {
+        Value = "NV",
+        Text = "NV"
+    });
+
+    states.Add(new SelectListItem()
+    {
+        Value = "CO",
+        Text = "CO"
+    });
+
+    states.Add(new SelectListItem()
+    {
+        Value = "WA",
+        Text = "WA"
+    });
+
+    states.Add(new SelectListItem()
+    {
+        Value = "CA",
+        Text = "CA"
+    });
+
+    var _repo = new Data.Repository.ADORepository();
+
+    var types = new List<SelectListItem>();
+    foreach (var type in _repo.GetPurchaseTypes())
+    {
+        types.Add(new SelectListItem()
+        {
+            Value = type.Id.ToString(),
+            Text = type.Type
+        });
+    }
+}
+<h2>Purchase Vehicle</h2>
+
+<h2>Search Results</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @{var vehicle = Model.Vehicle; }
+        <div class="vehicle col-md-12" id=@vehicle.InventoryNumber>
+            <div class="right4th col-md-3">
+                <p class="postBody">@(vehicle.Year)</p>
+                <p class="postBody">@(vehicle.Make)</p>
+                <p class="postBody">@(vehicle.Model)</p>
+            </div>
+            <div class="rightmid4th col-md-3">
+                <p class="postBody">@(vehicle.BodyStyle)</p>
+                <p class="postBody">@(vehicle.IsManual)</p>
+                <p class="postBody">@(vehicle.ExteriorColor)</p>
+            </div>
+            <div class="leftmid4th col-md-3">
+                <p class="postBody">@(vehicle.InteriorColor)</p>
+                <p class="postBody">@(vehicle.Mileage)</p>
+                <p class="postBody">@(vehicle.VIN)</p>
+            </div>
+
+            <div class="right4th col-md-3">
+                <p class="postBody">@(vehicle.SalePrice)</p>
+                <p class="postBody">@(vehicle.MSRP)</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<h2>Sales Information</h2>
+
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+@using (Html.BeginForm("Purchase", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="row col-md-12">
+        @Html.HiddenFor(m => m.Vehicle.InventoryNumber)
+        Name: @Html.TextBoxFor(m => m.Sales.Name, new { @class = "form-control" })
+        Phone:  @Html.TextBoxFor(m => m.Sales.Phone, new { @class = "form-control" })
+    </div>
+    <div class="row col-md-12">
+        Email:  @Html.TextBoxFor(m => m.Sales.Email, new { @class = "form-control" })
+    </div>
+    <div class="row col-md-12">
+
+        Street1: @Html.TextBoxFor(m => m.Sales.Street1, new { @class = "form-control" })
+        Street2:  @Html.TextBoxFor(m => m.Sales.Street2, new { @class = "form-control" })
+    </div>
+    <div class="row col-md-12">
+        City:  @Html.TextBoxFor(m => m.Sales.City, new { @class = "form-control" })
+        States: @Html.DropDownListFor(m => m.Sales.StateId, states, new { @class = "form-control" })
+
+    </div>
+    <div class="row col-md-12">
+        Zipcode:  @Html.TextBoxFor(m => m.Sales.Zipcode, new { @class = "form-control" })
+    </div>
+    <div class="row col-md-12">
+        Purchase Price:  @Html.TextBoxFor(m => m.Sales.PurchasePrice, new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Sales.PurchaseType, types, new { @class = "form-control" })
+    </div>
+    <input type="submit" value="Submit">
+
+}

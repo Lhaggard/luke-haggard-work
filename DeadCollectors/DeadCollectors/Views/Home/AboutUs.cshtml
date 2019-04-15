@@ -1,0 +1,24 @@
+﻿@model DeadCollectors.ViewModels.AboutUsViewModel
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="posts">
+    <h1 class="mt-5 mb-2 text-center">About Us</h1>
+
+    <div class="text-center" id="about-us-div">
+        @using (Html.BeginForm("AboutUs", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.AboutUsHTML.AboutUsHTML)
+            <div>
+                @Html.Raw(Model.AboutUsHTML.AboutUsHTML)
+
+                @if (User.IsInRole("admin"))
+                {
+                    <div>
+                    <button class="btn btn-dark mb-3">Edit</button>
+                    </div>
+                }
+            </div>
+        }
+    </div>

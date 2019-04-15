@@ -1,0 +1,166 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'plainblackwidenormal';
+    /*background-color: #D3B14D !important;*/
+    background: url(../Images/b9c56987ad1ff02ac0352cba142c505e.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.posts {
+    border-style: solid;
+    margin: auto;
+    text-align: center;
+    background-color: antiquewhite;
+    margin-top: 10px;
+}
+
+h1::first-letter {
+    font-size: 200%;
+    color: goldenrod;
+    border-style: solid;
+    background-color: maroon;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+@font-face {
+    font-family: 'plainblackwidenormal';
+    src: url('Plain_Black_Wide-webfont.eot');
+    src: url('Plain_Black_Wide-webfont.eot?#iefix') format('embedded-opentype'), url('Plain_Black_Wide-webfont.woff2') format('woff2'), url('Plain_Black_Wide-webfont.woff') format('woff'), url('Plain_Black_Wide-webfont.ttf') format('truetype'), url('Plain_Black_Wide-webfont.svg#plainblackwidenormal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#search-bar {
+    margin-left: 20px;
+}
+
+.form-control {
+    border: solid black 2px;
+}
+
+hr {
+    border-top: 2px solid black;
+}
+
+.nav-link {
+    font-size: 1.5em;
+    color: ghostwhite; 
+}
+
+.title {
+    font-size: 3em;
+}
+
+.nav-link:hover {
+    color: navajowhite;
+}
+
+.title {
+    display: block;
+}
+
+.header {
+    width: 100%;
+    margin: auto;
+    margin-left: 21%;
+}
+
+#half-hr {
+    width: 60%;
+    margin: auto;
+}
+
+.nav {
+    background-color: rgba(0,0,0,0.5);
+    padding: -5px;
+    position: sticky;
+    z-index: 9;
+}
+
+.hr-no-bottom-margin {
+    margin-bottom: 0px;
+}
+
+.hr-no-top-margin {
+    margin-top: 0px;
+}
+
+#nav-account-info {
+    background-color: rgba(0,0,0,0);
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#about-us-div {
+    margin: 20px;
+    padding-top: 20px;
+    border-top: 2px solid black;
+}
+
+label {
+    font-size: 1.5em;
+}
+
+#users-list {
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: 2px solid black !important;
+}
+
+#users-list a {
+    color: white;
+}
+
+#users-list a:hover {
+    color: navajowhite;
+    text-decoration: none;
+}
+
+#users-list tr {
+    border: 2px solid black;
+}
+
+#users-list tr:hover {
+    background-color: black;
+}
+
+#users-list th {
+    font-size: 1.5em;
+    background-color: black;
+}
+
+#search-category-dropdown {
+    border: 2px solid black;
+}
+
+#search-bar {
+    border: 2px solid black;
+}

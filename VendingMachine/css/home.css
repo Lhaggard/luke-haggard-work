@@ -1,0 +1,86 @@
+.item{
+    border-style: solid;
+    margin-left:20px;
+    margin-right:20px;
+    margin-bottom:20px;
+    margin-top:20px;
+    text-align:center;
+    color: #E3D0FF;
+    text-shadow: -1px 0 #E354FF, 0 1px #E354FF, 1px 0 #E354FF, 0 -1px #E354FF;
+}
+.display{
+    border-bottom-style: dotted ;
+}
+.left{
+    width: 75%
+}
+.right{
+    width: 25%
+}
+.change{
+    text-align: right;
+}
+.itemNumber{
+    text-align:left;
+}
+.title{
+    color: #C5FFFF;
+    text-shadow: -1.5px 0 #48F0FF, 0 1.5px #48F0FF, 1.5px 0 #48F0FF, 0 -1.5px #48F0FF;
+
+}
+.subTitle{
+    color:rgb(255, 237, 208);
+    text-shadow: -1.5px 0 #FFB915, 0 1.5px #FFB915, 1.5px 0 #FFB915, 0 -1.5px #FFB915;
+    text-align: right;
+}
+.container{
+    background-color: black;
+}
+
+.component
+{
+    padding: 2rem;
+    
+    background-color: black;
+}
+.rowTitle
+{
+    color: #C5FFFF;
+    text-shadow: -1.5px 0 #48F0FF, 0 1.5px #48F0FF, 1.5px 0 #48F0FF, 0 -1.5px #48F0FF;
+}
+.rightRow
+{
+ align-content: center;
+}
+.itemLabel
+{
+    color:rgb(255, 237, 208);
+    text-shadow: -1.5px 0 #FFB915, 0 1.5px #FFB915, 1.5px 0 #FFB915, 0 -1.5px #FFB915;
+    
+}
+
+/*  After several hours  of work I gave up on getting my custome buttons into the project. I would like to know if ther eis a good way to 
+do this
+  .centered {
+    position: absolute;
+    top: 60%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+  }
+  .buttonContainer{
+    position: relative;
+    text-align: center;
+  }
+
+ .image {
+    position:relative;
+    float:left;
+}
+
+.imageText {
+    left: 0;
+    position:absolute;
+    text-align:center;
+    top: 30px;
+    width: 100%
+}*/

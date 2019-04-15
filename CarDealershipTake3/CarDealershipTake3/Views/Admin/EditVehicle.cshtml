@@ -1,0 +1,158 @@
+﻿@using Microsoft.AspNet.Identity
+@model CarDealershipTake3.ViewModels.EditVehicleViewModel
+
+@{
+    ViewBag.Title = "EditVehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var makes = new List<SelectListItem>();
+    foreach (var make in Model.Makes)
+    {
+        makes.Add(new SelectListItem()
+        {
+            Text = make.Make,
+            Value = make.MakeId.ToString()
+        });
+    }
+
+    var colors = new List<SelectListItem>();
+    foreach (var color in Model.Color)
+    {
+        colors.Add(new SelectListItem()
+        {
+            Text = color.Color,
+            Value = color.Color
+        });
+
+    }
+
+
+    var interiors = new List<SelectListItem>();
+    foreach (var interior in Model.Interior)
+    {
+        interiors.Add(new SelectListItem()
+        {
+            Text = interior.Color,
+            Value = interior.Color
+        });
+
+    }
+
+
+    var bodys = new List<SelectListItem>();
+    foreach (var body in Model.Body)
+    {
+        bodys.Add(new SelectListItem()
+        {
+            Text = body.BodyStyle,
+            Value = body.BodyStyle
+        });
+
+    }
+
+
+    var models = new List<SelectListItem>();
+    foreach (var vmodel in Model.Models)
+    {
+        models.Add(new SelectListItem()
+        {
+            Text = vmodel.Model,
+            Value = vmodel.Model
+        });
+
+    }
+
+
+
+    var isNew = new List<SelectListItem>();
+    isNew.Add(new SelectListItem()
+    {
+        Text = "New",
+        Value = true.ToString()
+    });
+
+    isNew.Add(new SelectListItem()
+    {
+        Text = "Used",
+        Value = false.ToString()
+    });
+
+    }
+
+
+
+}
+
+<h2>Edit Vehicle</h2>
+
+
+<div class="col-md-12">
+    <p>Make</p>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @using (Html.BeginForm("UpdateVehicle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.TextBoxFor(m => m.Vehicle.InventoryNumber, Model.Vehicle.InventoryNumber.ToString(), new { @class = "form-control hidden readonly" })
+        @Html.DropDownListFor(m => m.Vehicle.Make, makes, new { id = "makesDropDown" })
+        @Html.DropDownListFor(m => m.Vehicle.Model, models, new { id = "modelsDropDown" })
+        @Html.DropDownListFor(m => m.Vehicle.IsNew, isNew, new { id = "isNew" })
+
+        @Html.DropDownListFor(m => m.Vehicle.BodyStyle, bodys, new { id = "bodyDropDown" })
+        <label>Year</label>
+        @Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Vehicle.ExteriorColor, colors, new { id = "colorDropDown" })
+        @Html.DropDownListFor(m => m.Vehicle.InteriorColor, interiors, new { id = "interiorDropDown" })
+        <label>Mileage</label>
+        @Html.TextBoxFor(m => m.Vehicle.Mileage, new { @class = "form-control" })
+
+        <label>VIN #</label>
+        @Html.TextBoxFor(m => m.Vehicle.VIN, new { @class = "form-control" })
+
+
+        <label>MSRP</label>
+        @Html.TextBoxFor(m => m.Vehicle.MSRP, new { @class = "form-control" })
+
+        <label>Sale Price</label>
+        @Html.TextBoxFor(m => m.Vehicle.SalePrice, new { @class = "form-control" })
+        <label>Featured:</label>
+        @Html.CheckBoxFor(m => m.Vehicle.IsFeatured, new { @class = "form-control"})
+        <label>Description</label>
+        @Html.TextBoxFor(m => m.Vehicle.Description, new { @class = "form-control" })
+        @Html.HiddenFor(m=> m.Vehicle.PicturePath)
+
+        <button>Save</button>
+    }
+    <img class="img-thumbnail" src="~/Images/@Model.Vehicle.PicturePath" />
+
+</div>
+
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        loadModels();
+    })
+    $("#makesDropDown").change(function (event) {
+        loadModels();
+    })
+    function loadModels() {
+        clearDropDown();
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:52020/models/' + $('#makesDropDown').val(),
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    var model = item.Model
+                    var modelId = item.ModelId
+                    var make = item.Make
+                    var row = '<option value="' + modelId + '"> '+ model +' </option>';
+  
+                    $('#modelsDropDown').append(row)
+                })
+            }
+        })
+
+    }
+    function clearDropDown() {
+        $("#modelsDropDown").empty();
+    }
+</script>
+    }

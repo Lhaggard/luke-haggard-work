@@ -1,0 +1,48 @@
+﻿@model  CarDealershipTake3.Models.RegisterViewModel
+@{
+    ViewBag.Title = "AddUser";
+
+
+    var roles = new List<SelectListItem>();
+    roles.Add(new SelectListItem()
+    {
+        Text = "Admin",
+        Value = "Admin"
+    });
+
+    roles.Add(new SelectListItem()
+    {
+        Text = "Sales",
+        Value = "Sales"
+    });
+
+    roles.Add(new SelectListItem()
+    {
+        Text = "Disabled",
+        Value = "Disabled"
+    });
+
+}
+
+<h2>AddUser</h2>
+<div class="col-md-12">
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <p>First Name:</p>
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        <p> Last Name:</p>
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        <p>Email:</p>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <p>Role:</p>
+        @Html.DropDownListFor(m => m.Role, roles, new { @class = "form-control" })
+        <p>Password:</p>
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+        <p>Confirm Password:</p>
+        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+        <button>Add</button>
+
+    }
+</div>

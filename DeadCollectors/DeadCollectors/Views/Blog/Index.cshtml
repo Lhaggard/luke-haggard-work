@@ -1,0 +1,78 @@
+﻿@model DeadCollectors.ViewModels.BlogIndexViewModel
+@{
+    ViewBag.Title = "Index";
+
+    var _repo = new DeadCollectors.Models.BlogRepository();
+
+    var categories = _repo.GetCategories();
+}
+
+<div id="search-div">
+    <input type="text" id="search-bar" placeholder="Search...">
+    <select id="search-category-dropdown">
+        <option value="all">All</option>
+        @foreach (var category in categories) {
+            <option value="@category.Name">@category.Name</option>
+        }
+    </select>
+    <button class="btn btn-dark" id="search-posts" onclick="searchPosts()">Search</button>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="model-posts">
+            @foreach (var post in Model.Posts) {
+                <div class="posts col-md-12 post-div" id=@post.PostID>
+                    @Html.Raw(post.Body)
+                    <div>
+                        <img class="img-thumbnail" src="~/Images/@post.Photo" />
+                    </div>
+                    <p class="category" style="font-size: 1.5rem;">@post.Category.Name</p>
+                    <p class="dateCreated">@post.Creation.ToString("MM/dd/yyyy")</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function searchPosts() {
+            $('#model-posts').empty();
+            if ($('#search-bar').val() == '') $('#search-bar').val('all');
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:58224/posts/search/' + $('#search-category-dropdown').val() + '/' + $('#search-bar').val(),
+                success: function (postsArray) {
+                    $.each(postsArray, function (index, post) {
+                        var PostId = post.PostId;
+                        var UserEmail = post.User.UserEmail;
+                        var Body = post.Body;
+                        var Creation = post.Creation;
+                        var CategoryName = post.Category.Name;
+                        var PhotoPath = post.Photo;
+
+                        var post = '<div class="posts col-md-12 post-div" id="' + PostId + '">';
+                        post += Body;
+                        post += '<img class="img-thumbnail" src="/Images/' + PhotoPath + '" />';
+                        post += '<p class="category" style="font-size: 1.5rem;">' + CategoryName + '</p>';
+                        post += '<p class="dateCreated">' + Creation.split('T')[0] + '</p>';
+                        post += '</div>';
+
+                        $('#model-posts').append(post);
+                    });
+
+                    $('#search-bar').val('');
+                    $('#search-category-dropdown').val('all');
+                },
+                error: function () {
+                    $("#errorMessages")
+                        .append($('<li>')
+                            .attr({ class: 'list-group-item list-group-item-danger' })
+                            .text("Error calling web service. Please try again later."));
+                }
+            });
+        }
+    </script>
+}
